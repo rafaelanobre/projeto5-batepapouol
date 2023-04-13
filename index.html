@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat UOL</title>
+    <link rel="stylesheet" href="./styles/reset.css">
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="user-login">
+      <img src="./images/logo 1.png" alt="logo bate papo UOL">
+      <div class="user-input">
+          <input type="text" class="login" placeholder="Digite seu nome">
+          <button type="submit" onclick="enterUsername()">Entrar</button>
+      </div>
+      <div class="loading hidden">
+          <img src="./images/Youtube_loading_symbol_1_(wobbly).gif" alt="Entrando no chat...">
+          <p>Entrando no chat...</p>
+      </div>
+  </div>
+
+    <header class="hidden">
+      <img src="./images/logo 1.png" alt="logo bate papo UOL">
+      <ion-icon name="people"></ion-icon>
+    </header>
+    <main class="hidden">
+        mensagens
+    </main>
+    <footer class="hidden">
+        <input type="text" id="mensagem" name="mensagem" placeholder="Escreva aqui..."><br><br>
+        <button type="submit" onclick="sendMessage()"><ion-icon name="paper-plane-outline"></ion-icon></button>
+    </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+	<script src="scripts.js"></script>
+  </body>
+</html>
