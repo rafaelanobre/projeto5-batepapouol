@@ -19,7 +19,7 @@
     <div class="user-login">
       <img src="./images/logo 1.png" alt="logo bate papo UOL">
       <div class="user-input">
-          <input type="text" class="login" placeholder="Digite seu nome">
+          <input type="text" id="login" class="login" placeholder="Digite seu nome">
           <button type="submit" onclick="enterUsername()">Entrar</button>
       </div>
       <div class="loading hidden">
@@ -28,14 +28,14 @@
       </div>
   </div>
 
-    <header class="hidden">
+    <header class="header hidden">
       <img src="./images/logo 1.png" alt="logo bate papo UOL">
       <ion-icon name="people"></ion-icon>
     </header>
-    <main class="hidden">
+    <main class="main hidden">
         mensagens
     </main>
-    <footer class="hidden">
+    <footer class="footer hidden">
         <input type="text" id="mensagem" name="mensagem" placeholder="Escreva aqui..."><br><br>
         <button type="submit" onclick="sendMessage()"><ion-icon name="paper-plane-outline"></ion-icon></button>
     </footer>

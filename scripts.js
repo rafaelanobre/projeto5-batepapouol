@@ -1,19 +1,46 @@
 axios.defaults.headers.common['Authorization'] = 'Da3XNfDHx4X7NJWZEq9v7eO1';
 
+//criar objeto user com o rótulo name
+let user= {};
+
 function enterUsername(){
-    //criar objeto user com o rótulo name
     //pegar o nome do input e colocar no objeto
+    user = {
+        name: document.getElementById("login").value
+    }
+    
     //declarar a variavel da requisição
-    //enviar para o sevidor com api const
+    //enviar para o sevidor com api post
+    const promise = axios.post ('https://mock-api.driven.com.br/api/vm/uol/participants', user);
+    document.querySelector(".user-input").classList.add("hidden");
+    document.querySelector(".loading").classList.remove("hidden");
 
     //se retornar status 200:
-    //chamar a função renderMessages com then
-    //dar hidden na página de carregando
-    //tirar o hidden do header, main e footer
+    promise.then(reply => {
+        if (reply.status === 200) {
+            //dar hidden na página de carregando
+            document.querySelector(".user-login").classList.add("hidden");
+            //tirar o hidden do header, main e footer
+            document.querySelector(".header").classList.remove("hidden");
+            document.querySelector(".main").classList.remove("hidden");
+            document.querySelector(".footer").classList.remove("hidden");
+
+            //chamar a função renderMessages com then
+            renderMessages();
+            setInterval(renderMessages, 3000);
+        }
+    });
 
     //se retornar status 400:
-    //chamar a função de erro com o catch
+    promise.catch(reply => {
+        if (reply.status === 400) {
+            //alert com o erro
+            alert("Já existe outro usuário com esse nome na sala, escolha outro para entrar");
 
+            //recarregar a página
+            window.location.reload()
+        }
+    });
 }
 
 function renderMessages(){
@@ -57,6 +84,7 @@ setInterval(newMessages, 3000);
 
 
 function loginChat(){
+    axios.post('https://mock-api.driven.com.br/api/vm/uol/status', user)
     //usar post para a url com o usuário
 }
 //usar set interval 5000
@@ -65,4 +93,3 @@ setInterval(loginChat, 5000);
 
 //Bônus: Layout menu lateral
 //Bônus: API Buscar participantes
-
