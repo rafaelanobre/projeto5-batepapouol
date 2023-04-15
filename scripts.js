@@ -26,8 +26,7 @@ function enterUsername(){
             document.querySelector(".footer").classList.remove("hidden");
 
             //chamar a função renderMessages com then
-            renderMessages();
-            setInterval(renderMessages, 3000);
+            getMessages();
         }
     });
 
@@ -42,23 +41,41 @@ function enterUsername(){
         }
     });
 }
-
-function renderMessages(){
+function getMessages(){
     //declarar a variavel da requisição
     //buscar mensagens antigas com o api get
+    const promise = axios.get('https://mock-api.driven.com.br/api/vm/uol/messages');
+
+    promise.then(renderMessages);
+}
+
+function renderMessages(reply){
+    let messages = document.querySelector(".messages");
+    messages.innerHTML = "";
+
     //criar um loop for que renderiza cada mensagem do array separada
     //usar if para ver se é status ou mensagem
+    for (let i=0; i< reply.data.length; i++){
+        console.log(reply);
 
-    //usar o código abaixo enquanto renderiza
-    //const elementoQueQueroQueApareca = document.querySelector('.mensagem');
-    //elementoQueQueroQueApareca.scrollIntoView();
-}
+        //renderiza os status
+        if (reply.data[i].type === "status"){
+            messages.innerHTML += `<li class="status">
+            <p><span style="color: #AAAAAA">(${reply.data[i].time})</span> <strong>${reply.data[i].from}</strong> ${reply.data[i].text}</p>
+            </li>`
+        }
 
-function newUsername(){
-    //alert de escolher um novo nome de usuário
-    //reload página para zerar usando
-    //window.location.reload()
-}
+        //renderiza as mensagens
+        else if (reply.data[i].type === "message"){
+            messages.innerHTML += `<li class="message">
+            <p><span style="color: #AAAAAA">(${reply.data[i].time})</span> <strong>${reply.data[i].from}</strong> para <strong>${reply.data[i].to}:</strong> ${reply.data[i].text}</p>
+            </li>`
+        }
+    }
+
+    //usar o scrollintoview enquanto renderiza
+    messages.scrollIntoView({ block: "end" });
+} 
 
 function sendMessage(){
     //criar um objeto mensagem
@@ -67,7 +84,8 @@ function sendMessage(){
 
     //declarar a variavel da requisição
     //enviar para o sevidor com api const
-    //chamar newMessages
+    //chamar a função que renderiza mensagens
+    renderMessages();
 }
 
 function enter(){
@@ -80,7 +98,7 @@ function newMessages(){
     //mas essa vai só adicionar as novas mensagens no innerhtml
 }
 //usar set interval 3000
-setInterval(newMessages, 3000);
+setInterval(getMessages, 3000);
 
 
 function loginChat(){

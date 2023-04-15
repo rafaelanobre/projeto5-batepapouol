@@ -6,6 +6,9 @@ body{
     background-color: #F3F3F3;
     font-family: 'Roboto';
 }
+strong{
+    font-weight: 700;
+}
 .user-login{
     margin-top: 70px;
     display: flex;
@@ -67,6 +70,10 @@ ion-icon{
 }
 main{
     margin-top: 120px;
+    margin-bottom: 160px;
+}
+ol{
+    messages: scroll;
 }
 
 footer{
@@ -109,4 +116,25 @@ footer button ion-icon{
 
 .hidden{
     display: none;
+}
+
+.status{
+    width: 100%;
+    background-color: #DCDCDC;
+    border-radius: 2px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 15px;
+    padding-left: 8px;
+    margin-bottom: 4px;
+}
+.message{
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 2px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 15px;
+    padding-left: 8px;
+    margin-bottom: 4px;
 }
