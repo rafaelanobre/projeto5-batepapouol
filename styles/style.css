@@ -70,10 +70,10 @@ ion-icon{
 }
 main{
     margin-top: 120px;
-    margin-bottom: 260px;
+    padding-bottom: 350px;
 }
 ol{
-    messages: scroll;
+    overflow-y: scroll;
 }
 
 footer{

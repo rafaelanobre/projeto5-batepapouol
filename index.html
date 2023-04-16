@@ -19,8 +19,8 @@
     <div class="user-login">
       <img src="./images/logo 1.png" alt="logo bate papo UOL">
       <div class="user-input">
-          <input type="text" id="login" class="login" placeholder="Digite seu nome">
-          <button type="submit" onclick="enterUsername()">Entrar</button>
+          <input type="text" id="login" class="login" placeholder="Digite seu nome" data-test="input-name">
+          <button type="submit" id="send-login" onclick="enterUsername()" data-test="send-name">Entrar</button>
       </div>
       <div class="loading hidden">
           <img src="./images/Youtube_loading_symbol_1_(wobbly).gif" alt="Entrando no chat...">
@@ -36,8 +36,8 @@
         <ol class="messages"></ol>
     </main>
     <footer class="footer hidden">
-        <input type="text" id="message" name="mensagem" placeholder="Escreva aqui..."><br><br>
-        <button type="submit" onclick="sendMessage()"><ion-icon name="paper-plane-outline"></ion-icon></button>
+        <input type="text" id="message" name="mensagem" placeholder="Escreva aqui..." data-test="input-message"><br><br>
+        <button type="submit" id="send-message" onclick="sendMessage()" data-test="send-message"><ion-icon name="paper-plane-outline"></ion-icon></button>
     </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

@@ -40,15 +40,21 @@ function enterUsername(){
         }
     });
 
-    //se retornar status 400:
+    
     promise.catch(reply => {
-        if (reply.status === 400) {
+
+        alert("Já existe outro usuário com esse nome na sala, escolha outro para entrar");
+
+        window.location.reload()
+
+        //se retornar status 400:
+        /*if (reply.status === 400) {
             //alert com o erro
             alert("Já existe outro usuário com esse nome na sala, escolha outro para entrar");
 
             //recarregar a página
             window.location.reload()
-        }
+        }*/
     });
 
     //usar set interval para manter conectado
@@ -83,14 +89,14 @@ function renderMessages(reply){
 
         //renderiza os status
         if (reply.data[i].type === "status"){
-            messages.innerHTML += `<li class="status">
+            messages.innerHTML += `<li class="status" data-test="message">
             <p><span style="color: #AAAAAA">(${reply.data[i].time})</span> <strong>${reply.data[i].from}</strong> ${reply.data[i].text}</p>
             </li>`
         }
 
         //renderiza as mensagens
         else if (reply.data[i].type === "message"){
-            messages.innerHTML += `<li class="message">
+            messages.innerHTML += `<li class="message" data-test="message">
             <p><span style="color: #AAAAAA">(${reply.data[i].time})</span> <strong>${reply.data[i].from}</strong> para <strong>${reply.data[i].to}:</strong> ${reply.data[i].text}</p>
             </li>`
         }
@@ -110,10 +116,6 @@ function sendMessage(){
         text: document.getElementById("message").value,
         type: "message"
     }
-    /*textMessage = {
-        from: user.name,
-        text: document.getElementById("message").value
-    }*/
 
     //declarar a variavel da requisição
     //enviar para o sevidor com api const
@@ -128,36 +130,44 @@ function sendMessage(){
     //se a mensagem não for enviada com sucesso
     promise.catch(reply => {
         //recarregar a janela
-        console.log(reply)
-        console.log(textMessage)
-        //window.location.reload();
+        console.log(reply);
+        window.location.reload();
     });
 
     document.getElementById("message").value = ""
     textMessage = ""
 }
 
+//Enter para login
+const loginInput = document.getElementById("login");
+
+loginInput.addEventListener("keypress", function(event) {
+    if (event.key === 'Enter') {
+        //Quando o enter é pressionado
+        event.preventDefault();
+        //Simula clicar no botão de envio
+        document.getElementById("send-login").click();
+    }
+    });
 
 
-function enter(){
-    //ao clicar no enter
-    //chama a funcao sendmessage
-}
+//Enter para mensagens
+const textInput = document.getElementById("message");
+
+textInput.addEventListener("keypress", function(event) {
+    if (event.key === 'Enter') {
+        //Quando o enter é pressionado
+        event.preventDefault();
+        //Simula clicar no botão de envio
+        document.getElementById("send-message").click();
+    }
+    });
 
 
-
-function newMessages(){
+/*function newMessages(){
     //igual a função getMessages
     //mas essa vai só adicionar as novas mensagens no innerhtml
-}
+}*/
+
 //usar set interval 3000
 setInterval(getMessages, 3000);
-
-
-
-
-
-
-
-//Bônus: Layout menu lateral
-//Bônus: API Buscar participantes
