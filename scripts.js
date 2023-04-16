@@ -3,6 +3,16 @@ axios.defaults.headers.common['Authorization'] = 'Da3XNfDHx4X7NJWZEq9v7eO1';
 //criar objeto user com o rótulo name
 let user= {};
 
+//criar um objeto mensagem
+let textMessage = {
+    from: "",
+    to: "Todos",
+    text: "",
+    type: "message"
+}
+
+
+
 function enterUsername(){
     //pegar o nome do input e colocar no objeto
     user = {
@@ -40,7 +50,18 @@ function enterUsername(){
             window.location.reload()
         }
     });
+
+    //usar set interval para manter conectado
+    setInterval(loginChat, 5000);
 }
+
+function loginChat(){
+    axios.post('https://mock-api.driven.com.br/api/vm/uol/status', user)
+    //usar post para a url com o usuário
+}   
+
+
+
 function getMessages(){
     //declarar a variavel da requisição
     //buscar mensagens antigas com o api get
@@ -48,6 +69,8 @@ function getMessages(){
 
     promise.then(renderMessages);
 }
+
+
 
 function renderMessages(reply){
     let messages = document.querySelector(".messages");
@@ -77,36 +100,63 @@ function renderMessages(reply){
     messages.scrollIntoView({ block: "end" });
 } 
 
+
+
 function sendMessage(){
-    //criar um objeto mensagem
     //pegar o texto para o objeto do input
-    //exibir se está enviando público ou privado
+    textMessage = {
+        from: user.name,
+        to: "Todos",
+        text: document.getElementById("message").value,
+        type: "message"
+    }
+    /*textMessage = {
+        from: user.name,
+        text: document.getElementById("message").value
+    }*/
 
     //declarar a variavel da requisição
     //enviar para o sevidor com api const
-    //chamar a função que renderiza mensagens
-    renderMessages();
+    const promise = axios.post ('https://mock-api.driven.com.br/api/vm/uol/messages', textMessage);
+
+    //se a mensagem for enviada com sucesso
+    promise.then(reply => {
+        //chamar a função que renderiza mensagens
+        getMessages();
+    });
+
+    //se a mensagem não for enviada com sucesso
+    promise.catch(reply => {
+        //recarregar a janela
+        console.log(reply)
+        console.log(textMessage)
+        //window.location.reload();
+    });
+
+    document.getElementById("message").value = ""
+    textMessage = ""
 }
+
+
 
 function enter(){
     //ao clicar no enter
     //chama a funcao sendmessage
 }
 
+
+
 function newMessages(){
-    //igual a função renderMessages
+    //igual a função getMessages
     //mas essa vai só adicionar as novas mensagens no innerhtml
 }
 //usar set interval 3000
 setInterval(getMessages, 3000);
 
 
-function loginChat(){
-    axios.post('https://mock-api.driven.com.br/api/vm/uol/status', user)
-    //usar post para a url com o usuário
-}
-//usar set interval 5000
-setInterval(loginChat, 5000);
+
+
+
 
 
 //Bônus: Layout menu lateral
